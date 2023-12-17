@@ -12,16 +12,16 @@ export default function Counter() {
   return (
     <div className='container'>
       <h2>Counter: {counter}</h2>
-      <button onClick={() => {
+      <button className='mx-2  btn btn-secondary' onClick={() => {
         dispatch(add1());
       }}>Add 1</button>
-      <button onClick={() => {
+      <button className='mx-2 btn btn-secondary'  onClick={() => {
         dispatch(resetCounter())
       }}>Reset all</button>
-      <button onClick={() => {
+      <button className='mx-2 btn btn-secondary'  onClick={() => {
         dispatch(addCustom({val:5}))
       }}>Add 5</button>
-      <button onClick={() => {
+      <button className='mx-2 btn btn-secondary'  onClick={() => {
         dispatch(addCustom({val:-6}))
       }}>reduce 6</button>
       <h3>User:{user}</h3>
