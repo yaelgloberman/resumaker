@@ -13,7 +13,7 @@ const App = () => {
             <div className="d-flex justify-content-between">
               <div  className='border mx-2 p-5'>
                 <h2>View all your resumes</h2>
-                <Link to="/resumes" className="btn btn-primary">View</Link>
+                <Link to="/resumeList" className="btn btn-primary">View</Link>
               </div>
               <div className='border mx-2 p-5'>
                 <h2>Make a new resume</h2>

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import CvMaker from './cvMaker'
-const YourFormComponent = () => {
+const ResumeForm = () => {
+    const [allResumes, setAllResumes] = useState([]); 
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
     const [imageUrl, setImageUrl] = useState('');
@@ -30,12 +31,23 @@ const YourFormComponent = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        // Add your form submission logic here using the captured data
-        console.log('Submitted data:', { firstName, lastName, imageUrl, workExperiences, educations });
-
-        // Set the state to indicate that the form has been submitted
+    
+        // Create a new resume object
+        const newResume = {
+          firstName,
+          lastName,
+          imageUrl,
+          workExperiences,
+          educations,
+        };
+    
+        // Add the new resume to the array of all resumes
+        setAllResumes([...allResumes, newResume]);
+    
+        // Log the submitted data and set the state to indicate that the form has been submitted
+        console.log('Submitted data:', newResume);
         setIsSubmitted(true);
-    };
+      };
 
     return (
         <div className="container d-flex justify-content-center align-items-center mt-5">
@@ -161,5 +173,5 @@ const YourFormComponent = () => {
     );
 };
 
-export default YourFormComponent;
+export default ResumeForm;
 

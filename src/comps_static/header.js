@@ -7,7 +7,7 @@ export default function Header() {
       <div className="container">
         <div className="row align-items-center">
           <div className='col-auto'>
-            <h2>My logo</h2>
+            <h2>Resumaker</h2>
           </div>
           <nav className="nav col-auto">
             <ul>
@@ -25,7 +25,13 @@ export default function Header() {
                 <Link to="/cv">CV</Link>
               </li>
               <li>
+                <Link to="/resumeList">Resume list</Link>
+              </li>
+              <li>
                 <Link to="/loginSignup">login signup</Link>
+              </li>
+              <li>
+                <Link to="/resume">Resume1</Link>
               </li>
             </ul>
           </nav>

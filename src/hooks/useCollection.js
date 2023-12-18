@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { db } from "../firebase/config";
+import { database } from "../firebase/config";
 
 
 import { collection, onSnapshot } from "firebase/firestore";
@@ -10,7 +10,7 @@ export const useCollection = (c) => {
 
 
   useEffect(() => {
-    let ref = collection(db, c)
+    let ref = collection(database, c)
     // will work every change in the cols
     const unSub = onSnapshot(ref, (snapshot) => {
       let fire_ar = [];

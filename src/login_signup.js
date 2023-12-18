@@ -1,86 +1,70 @@
-import React, { useRef } from 'react';
-import { useLogin } from './hooks/useLogin';
-import { useSignup } from './hooks/useSignUp';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
+import { database } from './firebase/config';
 
 export default function AuthForm() {
-  const mailRef = useRef();
-  const passRef = useRef();
+  const [login, setLogin] = useState(false);
   const navigate = useNavigate();
 
-  const { errorL, login } = useLogin();
-  const { errorS, SignUp } = useSignup();
+  const handleLogin = (isLogin) => {
+    console.log("login", isLogin);
+    setLogin(isLogin);
+  };
 
-  const onLogin = async (e) => {
+  const handleSubmit = (e, type) => {
     e.preventDefault();
-    try {
-      const user = await login(mailRef.current.value, passRef.current.value);
-      if (user && user.existsInDatabase) {
-        console.log("user.existsInDatabase",user.existsInDatabase);
-        console.log("user.user",user);
-        alert("Login successful");
-        navigate('/appResume'); // Redirect to /appResume after successful login and user exists in the database
-      } else {
-        alert("Login failed. User not found in the database.");
-      }
-    } catch (errorL) {
-      console.error("Login failed", errorL);
+    const email = e.target.email.value;
+    const password = e.target.password.value;
+
+    if (type === "signup") {
+      createUserWithEmailAndPassword(database, email, password)
+        .then((data) => {
+          console.log(data, "authData");
+          navigate("/resumeForm");
+        })
+        .catch((err) => {
+          alert(err.code);
+          setLogin(true);
+        });
+
+    } else {
+      signInWithEmailAndPassword(database, email, password)
+        .then((data) => {
+          console.log(data, "authData");
+          navigate("/appResume");
+        })
+        .catch((err) => {
+          console.log("y");
+          alert(err.code);
+        });
     }
   };
 
-
-
-
-
-  const onSignup = async (e) => {
-    e.preventDefault();
-    try {
-      await SignUp(mailRef.current.value, passRef.current.value);
-      alert("Signup successful");
-      navigate('/resumeForm'); // Redirect to /resumeForm after successful signup
-    } catch (errorS) {
-      console.error("Signup failed", errorS);
-
-      // Check if the error indicates that the email is already in use
-      if (errorS.message.includes('email-already-in-use')) {
-        alert("Signup failed. Email is already in use.");
-        // You may want to handle this case differently, such as displaying a message to the user or redirecting them to a login page.
-      } else {
-        // Handle other signup errors
-        alert("Signup failed. An error occurred.");
-      }
-    }
+  const handleReset = () => {
+    navigate("/reset");
   };
 
   return (
     <div className='container m-5'>
-      <form>
+      <form onSubmit={(e) => handleSubmit(e, login ? "signin" : "signup")}>
         <div className="row mb-3">
           <label htmlFor="email" className="col-sm-2 col-form-label ">Email:</label>
           <div className="col-sm-10">
-            <input className='form-control' ref={mailRef} type="email" id="email" />
+            <input name="email" className='form-control' type="email" id="email" />
           </div>
         </div>
         <div className="row mb-3">
           <label htmlFor="password" className="col-sm-2 col-form-label ps-1">Password:</label>
           <div className="col-sm-10">
-            <input className='form-control' ref={passRef} type="password" id="password" />
+            <input name="password" className='form-control' type="password" id="password" />
           </div>
         </div>
-        <h3 className='text-danger'>{errorL || errorS}</h3>
         <div className="d-flex justify-content-center mt-5 ">
-          <button type="submit" className='btn btn-success col-4 mx-2' onClick={onLogin}>Log in</button>
-          <button type="submit" className='btn btn-primary col-4 mx-2' onClick={onSignup}>Sign up</button>
+          <button type="submit" className='btn btn-success col-4 mx-2' onClick={() => handleLogin(true)}>Log in</button>
+          <button type="submit" className='btn btn-primary col-4 mx-2' onClick={() => handleLogin(false)}>Sign up</button>
         </div>
-
       </form>
     </div>
   );
-
 }
-
-
-
-
-
-
