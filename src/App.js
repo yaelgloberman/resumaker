@@ -13,7 +13,8 @@ import Counter from "./redux_comps/counter";
 import counterSlice from "./features/counterSlice";
 import todosSlice from "./features/todosSlice";
 import AppTodo from "./todoRedux_comps/appTodo";
-import Resume from "./comps_resume/app_resume";
+import  AppResume from "./comps_resume/app_resume";
+import ResumeForm from "./comps_resume/resumeForm";
 import Users from "./comps_users/app_users"
 import CV from "./cv"
 import SignUp from "./signUp"
@@ -50,7 +51,8 @@ function App() {
         <Route path="/signUp" element={<SignUp />} />
         {<Route path="/counter" element={<Counter />} /> }
         { <Route path="/todos" element={<AppTodo />} /> }
-        <Route path="/resume" element={<Resume />} /> 
+        <Route path="/appResume" element={<AppResume />} /> 
+        <Route path="/resumeForm" element={<ResumeForm />} /> 
         <Route path="/login" element={<Login />} /> 
         {/* כוכבית נשאיר לעמוד 404 אם לא מוצא אף
         ראוט יפעיל את מה שעם פאט' של כוכבית */}

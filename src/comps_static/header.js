@@ -36,6 +36,9 @@ export default function Header() {
                 <Link to="/resume">Resume</Link>
               </li>
               <li>
+                <Link to="/resumeForm">Resume form</Link>
+              </li>
+              <li>
                 <Link to="/cv">CV</Link>
               </li>
               <li>

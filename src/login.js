@@ -1,19 +1,24 @@
-import { Route } from "react-router-dom";
-import React, { useRef } from 'react'
-import { useLogin } from './hooks/useLogin'
-import Resume from "./comps_resume/resume";
+import React, { useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useLogin } from './hooks/useLogin';
+
 export default function Login() {
-  const {error, login} = useLogin()
+  const navigate = useNavigate();
+  const { error, login } = useLogin();
   const mailRef = useRef();
   const passRef = useRef();
 
-
-  const onSub = (e) => {
+  const onSub = async (e) => {
     e.preventDefault();
-    login(mailRef.current.value, passRef.current.value)
-    console.log("login");
-    {<Route path="/resume" element={<Resume />} />}     
-  }
+    try {
+      await login(mailRef.current.value, passRef.current.value);
+      console.log("login successful");
+      navigate('/appResume'); // Redirect to /resume after successful login
+    } catch (error) {
+      console.error("login failed", error);
+    }
+  };
+
   return (
     <div className='container'>
       <form onSubmit={onSub}>
@@ -23,8 +28,8 @@ export default function Login() {
         <label>Password:</label>
         <input ref={passRef} type="password" />
         <h3 className='text-danger'>{error}</h3>
-        <button>Log in</button>
+        <button type="submit">Log in</button>
       </form>
     </div>
-  )
-  }
+  );
+}
