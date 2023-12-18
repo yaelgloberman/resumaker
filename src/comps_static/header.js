@@ -29,6 +29,21 @@ export default function Header() {
               <li>
                 <Link to="/todos">Todo</Link>
               </li>
+              <li>
+                <Link to="/users">Users</Link>
+              </li>
+              <li>
+                <Link to="/resume">Resume</Link>
+              </li>
+              <li>
+                <Link to="/cv">CV</Link>
+              </li>
+              <li>
+                <Link to="/signUp">sign up</Link>
+              </li>
+              <li>
+                <Link to="/login">log in</Link>
+              </li>
             </ul>
           </nav>
         </div>
