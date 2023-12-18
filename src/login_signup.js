@@ -24,7 +24,9 @@ export default function AuthForm() {
           navigate("/resumeForm");
         })
         .catch((err) => {
-          alert(err.code);
+          // Check if err is defined before accessing its properties
+          const errorMessage = err?.code || "An error occurred";
+          alert(errorMessage);
           setLogin(true);
         });
 
@@ -35,14 +37,12 @@ export default function AuthForm() {
           navigate("/appResume");
         })
         .catch((err) => {
+          // Check if err is defined before accessing its properties
+          const errorMessage = err?.code || "An error occurred";
           console.log("y");
-          alert(err.code);
+          alert(errorMessage);
         });
     }
-  };
-
-  const handleReset = () => {
-    navigate("/reset");
   };
 
   return (

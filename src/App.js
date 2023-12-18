@@ -12,7 +12,7 @@ import ResumeForm from "./comps_resume/resumeForm";
 import Users from "./comps_users/app_users"
 import CV from "./cv"
 import ResumeList from "./comps_resume/resumeList"
-import Login_Signup from "./login_signup"
+import LoginSignup from "./login_signup"
 import Resume from "./comps_resume/resume"
 
 
@@ -32,7 +32,7 @@ function App() {
         <Route path="/cv" element={<CV />} />
         <Route path="/appResume" element={<AppResume />} /> 
         <Route path="/resumeForm" element={<ResumeForm />} /> 
-        <Route path="/loginSignup" element={<Login_Signup />} /> 
+        <Route path="/loginSignup" element={<LoginSignup/>} /> 
         <Route path="/resumeList" element={<ResumeList />} /> 
         <Route path="/resume" element={<Resume />} /> 
 
