@@ -17,8 +17,6 @@ const Cv = ({ firstName, lastName, imageUrl, educations, workExperiences }) => {
 
       // Calculate the width and height of the PDF based on A4 dimensions
       const pdfWidth = pdf.internal.pageSize.getWidth();
-      const pdfHeight = pdf.internal.pageSize.getHeight();
-
       const imgWidth = pdfWidth;
       const imgHeight = (canvas.height * imgWidth) / canvas.width;
 

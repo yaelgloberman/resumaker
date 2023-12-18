@@ -32,13 +32,13 @@ const YourFormComponent = () => {
         e.preventDefault();
         // Add your form submission logic here using the captured data
         console.log('Submitted data:', { firstName, lastName, imageUrl, workExperiences, educations });
-        
+
         // Set the state to indicate that the form has been submitted
         setIsSubmitted(true);
     };
 
     return (
-        <div className="container d-flex justify-content-center align-items-center ">
+        <div className="container d-flex justify-content-center align-items-center mt-5">
             {isSubmitted ? (
                 <CvMaker
                     firstName={firstName}
@@ -48,103 +48,113 @@ const YourFormComponent = () => {
                     educations={educations}
                 />
             ) : (
-                 <form onSubmit={handleSubmit} className='col-md-6 p-2'>
-                <label><b>First Name</b></label>
-                <input type="text" className='form-control' value={firstName} onChange={(e) => setFirstName(e.target.value)} />
-                <label><b>Last Name</b></label>
-                <input type="text" className='form-control' value={lastName} onChange={(e) => setLastName(e.target.value)} />
-                <label><b>Profile Picture</b></label>
-                <input type="text" className='form-control' value={imageUrl} onChange={(e) => setImageUrl(e.target.value)} />
+                <form onSubmit={handleSubmit} className='col-md-6 p-2'>
+                    <label><b>Info:</b></label>
+                    <input type="text" className='form-control my-2' placeholder='first name' value={firstName} onChange={(e) => setFirstName(e.target.value)} />
+                    <input type="text" className='form-control my-2' placeholder='Last Name' value={lastName} onChange={(e) => setLastName(e.target.value)} />
+                    <input type="text" className='form-control my-2' placeholder='Profile Picture' value={imageUrl} onChange={(e) => setImageUrl(e.target.value)} />
+                    <div className="work-experience  mt-3">
+                        <label><b>Work Experience:</b></label>
+                        {workExperiences.map((experience, index) => (
+                            <div key={index}>
+                                <input
+                                    type="text"
+                                    className='form-control my-2'
+                                    placeholder='Job Title'
+                                    value={experience.jobTitle}
+                                    onChange={(e) => handleWorkExperienceChange(index, 'jobTitle', e.target.value)}
+                                />
 
-                <div className="work-experience">
-                    <label><b>Work Experience:</b></label>
-                    {workExperiences.map((experience, index) => (
-                        <div key={index}>
-                            <label>Job Title:</label>
-                            <input
-                                type="text"
-                                className='form-control'
-                                value={experience.jobTitle}
-                                onChange={(e) => handleWorkExperienceChange(index, 'jobTitle', e.target.value)}
-                            />
-                            <div className="row">
-                                <div className="col-6">
-                                    <label>Start Date:</label>
-                                    <input
-                                        type="date"
-                                        className="form-control"
-                                        value={experience.startDate}
-                                        onChange={(e) => handleWorkExperienceChange(index, 'startDate', e.target.value)}
-                                    />
+                                <div className="row my-2">
+                                    <div className="row">
+                                        <div className="col-2 mt-1">
+                                            <label>Start Date:</label>
+                                        </div>
+                                        <div className="col-4">
+                                            <input
+                                                type="date"
+                                                className="form-control"
+                                                value={experience.startDate}
+                                                onChange={(e) => handleWorkExperienceChange(index, 'startDate', e.target.value)}
+                                            />
+                                        </div>
+                                        <div className="col-2 mt-1 ">
+                                            <label>End Date:</label>
+                                        </div>
+                                        <div className="col-4">
+                                            <input
+                                                type="date"
+                                                className="form-control"
+                                                value={experience.endDate}
+                                                onChange={(e) => handleWorkExperienceChange(index, 'endDate', e.target.value)}
+                                            />
+                                        </div>
+                                    </div>
                                 </div>
-                                <div className="col-6">
-                                    <label>End Date:</label>
-                                    <input
-                                        type="date"
-                                        className="form-control"
-                                        value={experience.endDate}
-                                        onChange={(e) => handleWorkExperienceChange(index, 'endDate', e.target.value)}
-                                    />
-                                </div>
+
                             </div>
+                        ))}
+                        <button type="button" className=' my-2 btn btn-outline-primary' onClick={handleAddWorkExperience}>Add Work Experience</button>
+                    </div>
 
+                    <div className="education mt-3">
+                        <label><b>Education:</b></label>
+                        {educations.map((education, index) => (
+                            <div key={index}>
+                                <input
+                                    placeholder='School'
+                                    type="text"
+                                    className='form-control my-2'
+                                    value={education.name}
+                                    onChange={(e) => handleEducationChange(index, 'name', e.target.value)}
+                                />
+                                <select
+                                    className="form-control"
+                                    value={education.degree}
+                                    onChange={(e) => handleEducationChange(index, 'degree', e.target.value)}
+                                >
+                                    <option value="">Select Degree</option>
+                                    <option value="High School Diploma">High School Diploma</option>
+                                    <option value="Bachelor's Degree">Bachelor's Degree</option>
+                                    <option value="Master's Degree">Master's Degree</option>
+                                    {/* Add more degree options as needed */}
+                                </select>
+                                <div className="row my-3">
+                                    <div className="row">
+                                        <div className="col-2 mt-1">
+                                            <label>Start Date:</label>
+                                        </div>
+                                        <div className="col-4">
+                                            <input
+                                                type="date"
+                                                className="form-control"
+                                                value={education.startDate}
+                                                onChange={(e) => handleEducationChange(index, 'startDate', e.target.value)}
+                                            />
+                                        </div>
+                                        <div className="col-2 mt-1 ">
+                                            <label>End Date:</label>
+                                        </div>
+                                        <div className="col-4 ">
+                                            <input
+                                                type="date"
+                                                className="form-control"
+                                                value={education.endDate}
+                                                onChange={(e) => handleEducationChange(index, 'endDate', e.target.value)}
+                                            />
+                                        </div>
+                                    </div>
 
-                        </div>
-                    ))}
-                    <button type="button" className=' my-2 btn btn-outline-primary' onClick={handleAddWorkExperience}>Add Work Experience</button>
-                </div>
-
-                <div className="education">
-                    <label><b>Education:</b></label>
-                    {educations.map((education, index) => (
-                        <div key={index}>
-                            <label>School:</label>
-                            <input
-                                type="text"
-                                className='form-control'
-                                value={education.name}
-                                onChange={(e) => handleEducationChange(index, 'name', e.target.value)}
-                            />
-                            <label>Degree:</label>
-                            <select
-                                className="form-control"
-                                value={education.degree}
-                                onChange={(e) => handleEducationChange(index, 'degree', e.target.value)}
-                            >
-                                <option value="">Select Degree</option>
-                                <option value="High School Diploma">High School Diploma</option>
-                                <option value="Bachelor's Degree">Bachelor's Degree</option>
-                                <option value="Master's Degree">Master's Degree</option>
-                                {/* Add more degree options as needed */}
-                            </select>
-                            <div className="row">
-                                <div className="col-6">
-                                    <label>Start Date:</label>
-                                    <input
-                                        type="date"
-                                        className="form-control"
-                                        value={education.startDate}
-                                        onChange={(e) => handleEducationChange(index, 'startDate', e.target.value)}
-                                    />
                                 </div>
-                                <div className="col-6">
-                                    <label>End Date:</label>
-                                    <input
-                                        type="date"
-                                        className="form-control"
-                                        value={education.endDate}
-                                        onChange={(e) => handleEducationChange(index, 'endDate', e.target.value)}
-                                    />
-                                </div>
+
                             </div>
+                        ))}
+                        <button type="button" className='my-2 btn btn-outline-primary' onClick={handleAddEducation}>Add Education</button>
 
-                        </div>
-                    ))}
-                    <button type="button" className='my-2 btn btn-outline-primary' onClick={handleAddEducation}>Add Education</button>
-                </div>
+                    </div>
+                    <button type="submit" className='btn btn-success mt-3 mx-auto d-block'>Submit</button>
 
-               
-                    <button type="submit" className='btn btn-success mt-3'>Submit</button>
+
                 </form>
             )}
         </div>

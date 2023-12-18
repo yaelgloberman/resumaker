@@ -14,26 +14,9 @@ export default function Header() {
               <li>
                 <Link to="/">Home</Link>
               </li>
-              <li>
-                <Link to="/about">About</Link>
-              </li>
-              <li>
-                <Link to="/employee">Employee</Link>
-              </li>
+            
               <li>
                 <Link to="/form">Form</Link>
-              </li>
-              <li>
-                <Link to="/counter">Counter</Link>
-              </li>
-              <li>
-                <Link to="/todos">Todo</Link>
-              </li>
-              <li>
-                <Link to="/users">Users</Link>
-              </li>
-              <li>
-                <Link to="/resume">Resume</Link>
               </li>
               <li>
                 <Link to="/resumeForm">Resume form</Link>
@@ -42,10 +25,7 @@ export default function Header() {
                 <Link to="/cv">CV</Link>
               </li>
               <li>
-                <Link to="/signUp">sign up</Link>
-              </li>
-              <li>
-                <Link to="/login">log in</Link>
+                <Link to="/loginSignup">login signup</Link>
               </li>
             </ul>
           </nav>

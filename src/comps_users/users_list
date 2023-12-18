@@ -1,18 +1,19 @@
-import React from 'react'
-import { useCollection } from '../hooks/useCollection'
+import React from 'react';
+import { useCollection } from '../hooks/useCollection';
 
-const users_list = () => {
+const UsersList = () => {
+  // Assuming "users" is the collection name
+  const { docs: users } = useCollection('users');
+
   return (
     <div className='container'>
-    <ul>
-      {users.map(item => {
-        return(
+      <ul>
+        {users.map((item) => (
           <li key={item.id}>{item.title}</li>
-        )
-      })}
-    </ul>
-  </div>  )
+        ))}
+      </ul>
+    </div>
+  );
 };
 
-export default users_list
-
+export default UsersList;
