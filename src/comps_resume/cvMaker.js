@@ -1,38 +1,18 @@
+// Cv.js
 import React, { useState } from 'react';
 import { Button } from 'reactstrap';
-import jsPDF from 'jspdf';
-import html2canvas from 'html2canvas';
+import { pdfGenerate } from './pdfDownloadButton';
 
 const Cv = ({ firstName, lastName, imageUrl, educations, workExperiences, title }) => {
     const [showButton, setShowButton] = useState(true);
 
-    const pdfGenerate = () => {
-        const pdfContainer = document.getElementById('pdf-container');
-
-        html2canvas(pdfContainer).then((canvas) => {
-            setShowButton(false); // Hide the button before generating the PDF
-
-            const imgData = canvas.toDataURL('image/png');
-            const pdf = new jsPDF('portrait', 'px', 'a4');
-
-            // Calculate the width and height of the PDF based on A4 dimensions
-            const pdfWidth = pdf.internal.pageSize.getWidth();
-            const imgWidth = pdfWidth;
-            const imgHeight = (canvas.height * imgWidth) / canvas.width;
-
-            pdf.addImage(imgData, 'PNG', 0, 0, imgWidth, imgHeight);
-            pdf.save(`${firstName}_${lastName}_CV.pdf`);
-        });
-    };
-
     const handleImageLoad = () => {
-        // Once the image is loaded, show the button
         setShowButton(true);
     };
 
     return (
-        <div className="container col-8 bg-dark" id="pdf-container" style={{ backgroundColor: '#E6E6FA', minHeight: '1200px' }}>
-            <div className="row">
+        <div className="container col-10 bg-dark" id="pdf-container" >
+   <div className="row">
                 <div className='text-white w-75 p-4'>
                     {/* Main Content */}
                     <header className="mt-4 text-center">
@@ -68,12 +48,10 @@ const Cv = ({ firstName, lastName, imageUrl, educations, workExperiences, title 
                     />
                 </div>
             </div>
-
-            <Button onClick={pdfGenerate} className='btn btn-success'>
-                Download PDF
-            </Button>
+            
         </div>
     );
 };
 
 export default Cv;
+

@@ -1,5 +1,9 @@
 import React, { useState } from 'react';
 import CvMaker from './cvMaker'
+import Firebase from '../firebase/firebase';
+import { Button } from 'reactstrap';
+import { pdfGenerate } from './pdfDownloadButton';
+
 const ResumeForm = () => {
     const [allResumes, setAllResumes] = useState([]);
     const [firstName, setFirstName] = useState('Full name');
@@ -42,6 +46,12 @@ const ResumeForm = () => {
             educations,
             title
         };
+        let firebase = new Firebase();
+        firebase.addResume(newResume);
+        firebase.getAllResumes().then((resumes) => {
+            console.log("resume");
+            console.log(resumes);
+          });
 
         // Add the new resume to the array of all resumes
         setAllResumes([...allResumes, newResume]);
@@ -165,7 +175,7 @@ const ResumeForm = () => {
                     </form>
                 
             </div>
-            <div className='bg-dark col-7 '>
+            <div >
             <CvMaker
                         firstName={firstName}
                         lastName={lastName}
@@ -175,6 +185,9 @@ const ResumeForm = () => {
                         title={title}
                     />
             </div>
+            <Button onClick={() => pdfGenerate(firstName, lastName, educations, workExperiences, title)} className='btn btn-success'>
+                Download PDF
+            </Button>
         </div>
     );
 };

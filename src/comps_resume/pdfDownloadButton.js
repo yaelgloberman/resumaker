@@ -1,37 +1,25 @@
-// src/components/PdfDownloadButton.js
-import React, { useState, useEffect } from 'react';
-import html2pdf from 'html2pdf.js';
-import { db } from '../firebase/config';
+import jsPDF from 'jspdf';
+import html2canvas from 'html2canvas';
 
-const PdfDownloadButton = ({ userId }) => {
-    const [resumeContent, setResumeContent] = useState('');
-    useEffect(() => {
-        const fetchResumeDetails = async () => {
-            try {
-                const resumeSnapshot =  await db.collection('resumes').where('userId', '==', userId).get();
+export const pdfGenerate = (firstName, lastName, educations, workExperiences, title) => {
+    const pdfContainer = document.getElementById('pdf-container');
 
-                if (!resumeSnapshot.empty) {
-                    const resumeData = resumeSnapshot.docs[0].data();
-                    // Set resume content based on fetched data
-                    setResumeContent(<div>${resumeData.name}</div>); // Add other fields
-                }
-            } catch (error) {
-                console.error('Error fetching resume details:', error);
-            }
-        };
+    // Set A4 dimensions
+    const pdfWidth = 210; // A4 width in mm
+    const pdfHeight = 297; // A4 height in mm
 
-        fetchResumeDetails();
-    }, [userId]);
+    html2canvas(pdfContainer, { scale: 2 }).then((canvas) => {
+        const imgData = canvas.toDataURL('image/png');
+        const pdf = new jsPDF('portrait', 'mm', 'a4');
 
-    const handleDownload = () => {
-        html2pdf().from(resumeContent).save();
-    };
+        // Calculate the aspect ratio to maintain the original size on the A4 page
+        const imgWidth = pdfWidth;
+        const imgHeight = (canvas.height * imgWidth) / canvas.width;
 
-    return (
-        <div className='container'>
-            <button className='btn btn-success my-2 text-center ' onClick={handleDownload}>Download PDF</button>
-        </div>
-    );
+        // Add the image to the PDF, positioning it at the top-left corner
+        pdf.addImage(imgData, 'PNG', 0, 0, imgWidth, imgHeight);
+
+        // Save the PDF
+        pdf.save(`${firstName}_${lastName}_CV.pdf`);
+    });
 };
-
-export default PdfDownloadButton;
