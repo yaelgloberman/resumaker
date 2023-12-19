@@ -13,7 +13,6 @@ import Users from "./comps_users/app_users"
 import CV from "./cv"
 import ResumeList from "./comps_resume/resumeList"
 import LoginSignup from "./login_signup"
-import Resume from "./comps_resume/resume"
 
 
 
@@ -34,7 +33,6 @@ function App() {
         <Route path="/resumeForm" element={<ResumeForm />} /> 
         <Route path="/loginSignup" element={<LoginSignup/>} /> 
         <Route path="/resumeList" element={<ResumeList />} /> 
-        <Route path="/resume" element={<Resume />} /> 
         <Route path="*" element={<h2>Page 404, not found!</h2>} />
       </Routes>
     </BrowserRouter>
