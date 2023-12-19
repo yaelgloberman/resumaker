@@ -1,9 +1,13 @@
-// Cv.js
 import React, { useState } from 'react';
 import { Button } from 'reactstrap';
 import { pdfGenerate } from './pdfDownloadButton';
+import DarkStyle from './darkResume';
+import ColorfulStyle from './colorfulResume';
+import ClassicStyle from './classicResume';
+import ArtistStyle from './artistResume';
+import ModernStyle from './modernResume'; // Added import for ModernStyle
 
-const Cv = ({ firstName, lastName, imageUrl, educations, workExperiences, title }) => {
+const Cv = ({ firstName, lastName, imageUrl, educations, workExperiences, title, cvStyle }) => {
     const [showButton, setShowButton] = useState(true);
 
     const handleImageLoad = () => {
@@ -11,46 +15,60 @@ const Cv = ({ firstName, lastName, imageUrl, educations, workExperiences, title 
     };
 
     return (
-        <div className="container col-10 bg-dark" id="pdf-container"  >
-            <div className="row">
-                <div className='text-white w-75 p-4'>
-                    {/* Main Content */}
-                    <header className="mt-4 text-center">
-                        <h1>{`${firstName} ${lastName}`}</h1>
-                        <p className="lead">{`${title}`}</p>
-                    </header>
-
-                    <section className="education mt-4">
-                        <h2>Education</h2>
-                        {educations.map((education, index) => (
-                            <div key={index}>
-                                <b><h5>{education.name}</h5></b>
-                                <p>Degree: {education.degree}</p>
-                                <p>Start Date: {education.startDate}</p>
-                                <p>End Date: {education.endDate}</p>
-                            </div>
-                        ))}
-                    </section>
-                    <section className="experience mt-4">
-                        <h2>Work Experience</h2>
-                        {workExperiences.map((experience, index) => (
-                            <p key={index}>{experience.jobTitle} - {experience.startDate} to {experience.endDate}</p>
-                        ))}
-                    </section>
-                </div>
-
-                <div className="col-6 w-25 mt-5">
-                    <img
-                        src={imageUrl} // Use the provided image URL
-                        alt={`${firstName} ${lastName}`}
-                        className="img-fluid mt-5 flex-end"
-                        onLoad={handleImageLoad} // Add onload event to trigger when the image is loaded
-                    />
-                </div>
-            </div>
+        <div  id="pdf-container">
+            {cvStyle === 'Dark' ? (
+                <DarkStyle
+                    firstName={firstName}
+                    lastName={lastName}
+                    imageUrl={imageUrl}
+                    workExperiences={workExperiences}
+                    educations={educations}
+                    title={title}
+                    cvStyle={cvStyle}
+                />
+            ) : cvStyle === 'Classic' ? (
+                <ClassicStyle
+                    firstName={firstName}
+                    lastName={lastName}
+                    imageUrl={imageUrl}
+                    workExperiences={workExperiences}
+                    educations={educations}
+                    title={title}
+                    cvStyle={cvStyle}
+                />
+            ) : cvStyle === 'Modern' ? (
+                <ModernStyle // Fixed to use ModernStyle instead of DarkStyle
+                    firstName={firstName}
+                    lastName={lastName}
+                    imageUrl={imageUrl}
+                    workExperiences={workExperiences}
+                    educations={educations}
+                    title={title}
+                    cvStyle={cvStyle}
+                />
+            ) : cvStyle === 'Artist' ? (
+                <ArtistStyle
+                    firstName={firstName}
+                    lastName={lastName}
+                    imageUrl={imageUrl}
+                    workExperiences={workExperiences}
+                    educations={educations}
+                    title={title}
+                    cvStyle={cvStyle}
+                />
+            ) : cvStyle === 'Colorful' ? (
+                <ColorfulStyle
+                    firstName={firstName}
+                    lastName={lastName}
+                    imageUrl={imageUrl}
+                    workExperiences={workExperiences}
+                    educations={educations}
+                    title={title}
+                    cvStyle={cvStyle}
+                />
+            ) : null}
         </div>
     );
 };
 
 export default Cv;
-

@@ -10,10 +10,15 @@ const ResumeForm = () => {
     const [lastName, setLastName] = useState('');
     const [imageUrl, setImageUrl] = useState('https://images.pexels.com/photos/771742/pexels-photo-771742.jpeg?auto=compress&cs=tinysrgb&w=600');
     const [title, setTitle] = useState('Title');
+    const [cvStyle, setCv] = useState('Dark');
     const [workExperiences, setWorkExperiences] = useState([{ jobTitle: '', startDate: '', endDate: '' }]);
     const [educations, setEducations] = useState([{ name: '', startDate: '', endDate: '', degree: '' }]);
     const [isSubmitted, setIsSubmitted] = useState(false);
 
+    const handleStyleButtonClick = (style) => {
+        setCv(style);
+        {console.log("style",style);}
+    };
     const handleAddWorkExperience = () => {
         setWorkExperiences([...workExperiences, { jobTitle: '', startDate: '', endDate: '' }]);
     };
@@ -44,7 +49,8 @@ const ResumeForm = () => {
             imageUrl,
             workExperiences,
             educations,
-            title
+            title,
+            cvStyle
         };
         let firebase = new Firebase();
         firebase.addResume(newResume);
@@ -178,7 +184,6 @@ const ResumeForm = () => {
             <div className=' mt-4'>
 
                 <div >
-
                     <CvMaker
                         firstName={firstName}
                         lastName={lastName}
@@ -186,23 +191,24 @@ const ResumeForm = () => {
                         workExperiences={workExperiences}
                         educations={educations}
                         title={title}
-                        
+                        cvStyle={cvStyle}
+
                     />
                 </div>
                 <div className='container ms-5 mt-4'>
                     <div className='mb-5 mt-2'>
 
-                <Button className='me-2'>Classic</Button>
-                <Button className='mx-2'>Modern</Button>
-                <Button className='mx-2'>Artist</Button>
-                <Button className='mx-2'>Dark</Button>
-                <Button className='mx-2'>Colerfull</Button>
-                <br></br>
+                        <Button className='me-2' onClick={() => handleStyleButtonClick('Classic')}>Classic</Button>
+                        <Button className='mx-2' onClick={() => handleStyleButtonClick('Modern')}>Modern</Button>
+                        <Button className='mx-2' onClick={() => handleStyleButtonClick('Artist')}>Artist</Button>
+                        <Button className='mx-2' onClick={() => handleStyleButtonClick('Dark')}>Dark</Button>
+                        <Button className='mx-2' onClick={() => handleStyleButtonClick('Colorful')}>Colorful</Button>
+                        <br></br>
 
                     </div>
-                <Button onClick={() => pdfGenerate(firstName, lastName, educations, workExperiences, title)} className='btn btn-success'>
-                    Download PDF
-                </Button>
+                    <Button onClick={() => pdfGenerate(firstName, lastName, educations, workExperiences, title, cvStyle)} className='btn btn-success'>
+                        Download PDF
+                    </Button>
                 </div>
             </div>
         </div>

@@ -9,7 +9,7 @@ const DarkResume = ({ firstName, lastName, imageUrl, educations, workExperiences
         setShowButton(true);
     };
     return (
-        <div className="container col-11 bg-dark" id="pdf-container"  >
+        <div className="container col-10 bg-warning" id="pdf-container"  >
             <div className="row">
                 <div className='text-white w-75 p-4'>
                     {/* Main Content */}
