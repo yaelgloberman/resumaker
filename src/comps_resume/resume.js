@@ -60,6 +60,7 @@ const Resume = () => {
     addJobExperience();
   }, [db, userId]);
 
+  
   return <div>Resume</div>;
 };
 

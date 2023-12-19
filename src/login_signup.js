@@ -24,9 +24,7 @@ export default function AuthForm() {
           navigate("/resumeForm");
         })
         .catch((err) => {
-          // Check if err is defined before accessing its properties
-          const errorMessage = err?.code || "An error occurred";
-          alert(errorMessage);
+          alert(err.code);
           setLogin(true);
         });
 
@@ -37,12 +35,13 @@ export default function AuthForm() {
           navigate("/appResume");
         })
         .catch((err) => {
-          // Check if err is defined before accessing its properties
-          const errorMessage = err?.code || "An error occurred";
-          console.log("y");
-          alert(errorMessage);
+          alert(err.code);
         });
     }
+  };
+
+  const handleReset = () => {
+    navigate("/reset");
   };
 
   return (
@@ -61,8 +60,8 @@ export default function AuthForm() {
           </div>
         </div>
         <div className="d-flex justify-content-center mt-5 ">
-          <button type="submit" className='btn btn-success col-4 mx-2' onClick={() => handleLogin(true)}>Log in</button>
-          <button type="submit" className='btn btn-primary col-4 mx-2' onClick={() => handleLogin(false)}>Sign up</button>
+          <button type="submit" className='btn btn-success col-4 mx-2' onClick={() => handleLogin(false)}>Log in</button>
+          <button type="submit" className='btn btn-primary col-4 mx-2' onClick={() => handleLogin(true)}>Sign up</button>
         </div>
       </form>
     </div>

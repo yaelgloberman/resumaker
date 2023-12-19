@@ -35,8 +35,6 @@ function App() {
         <Route path="/loginSignup" element={<LoginSignup/>} /> 
         <Route path="/resumeList" element={<ResumeList />} /> 
         <Route path="/resume" element={<Resume />} /> 
-
-
         <Route path="*" element={<h2>Page 404, not found!</h2>} />
       </Routes>
     </BrowserRouter>
