@@ -14,6 +14,7 @@ const ResumeForm = () => {
     const [workExperiences, setWorkExperiences] = useState([{ jobTitle: '', startDate: '', endDate: '' }]);
     const [educations, setEducations] = useState([{ name: '', startDate: '', endDate: '', degree: '' }]);
     const [isSubmitted, setIsSubmitted] = useState(false);
+    const [uid, setUid] = useState('123');
 
     const handleStyleButtonClick = (style) => {
         setCv(style);
@@ -49,8 +50,7 @@ const ResumeForm = () => {
             imageUrl,
             workExperiences,
             educations,
-            title,
-            cvStyle
+            title
         };
         let firebase = new Firebase();
         firebase.addResume(newResume);
