@@ -9,9 +9,9 @@ const DarkResume = ({ Resume }) => {
         setShowButton(true);
     };
     return (
-        <div className="container col-10" style={{ backgroundColor: '#FFF5EB' }} id="pdf-container">
+        <div className="container"  id="pdf-container" >
 
-            <div className="row">
+            <div className="row mx-5">
                 <div className="text-white w-75">
                     {/* Main Content */}
                     <header className="mt-4 text-center">
