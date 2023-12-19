@@ -13,58 +13,35 @@ const Cv = ({ firstName, lastName, imageUrl, educations, workExperiences, title,
     const handleImageLoad = () => {
         setShowButton(true);
     };
-
+    const Resume = {
+        firstName,
+        lastName,
+        imageUrl,
+        workExperiences,
+        educations,
+        title
+    }
     return (
-        <div  id="pdf-container">
+        <div id="pdf-container">
             {cvStyle === 'Dark' ? (
                 <DarkStyle
-                    firstName={firstName}
-                    lastName={lastName}
-                    imageUrl={imageUrl}
-                    workExperiences={workExperiences}
-                    educations={educations}
-                    title={title}
-                    cvStyle={cvStyle}
+                    Resume={Resume}
                 />
             ) : cvStyle === 'Classic' ? (
                 <ClassicStyle
-                    firstName={firstName}
-                    lastName={lastName}
-                    imageUrl={imageUrl}
-                    workExperiences={workExperiences}
-                    educations={educations}
-                    title={title}
-                    cvStyle={cvStyle}
+                    Resume={Resume}
                 />
             ) : cvStyle === 'Modern' ? (
                 <ModernStyle // Fixed to use ModernStyle instead of DarkStyle
-                    firstName={firstName}
-                    lastName={lastName}
-                    imageUrl={imageUrl}
-                    workExperiences={workExperiences}
-                    educations={educations}
-                    title={title}
-                    cvStyle={cvStyle}
+                Resume={Resume}
                 />
             ) : cvStyle === 'Artist' ? (
                 <ArtistStyle
-                    firstName={firstName}
-                    lastName={lastName}
-                    imageUrl={imageUrl}
-                    workExperiences={workExperiences}
-                    educations={educations}
-                    title={title}
-                    cvStyle={cvStyle}
+                Resume={Resume}
                 />
             ) : cvStyle === 'Colorful' ? (
                 <ColorfulStyle
-                    firstName={firstName}
-                    lastName={lastName}
-                    imageUrl={imageUrl}
-                    workExperiences={workExperiences}
-                    educations={educations}
-                    title={title}
-                    cvStyle={cvStyle}
+                Resume={Resume}
                 />
             ) : null}
         </div>
