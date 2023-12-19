@@ -13,6 +13,7 @@ const ResumeForm = () => {
     const [workExperiences, setWorkExperiences] = useState([{ jobTitle: '', startDate: '', endDate: '' }]);
     const [educations, setEducations] = useState([{ name: '', startDate: '', endDate: '', degree: '' }]);
     const [isSubmitted, setIsSubmitted] = useState(false);
+    const [uid, setUid] = useState('123');
 
     const handleAddWorkExperience = () => {
         setWorkExperiences([...workExperiences, { jobTitle: '', startDate: '', endDate: '' }]);
@@ -44,7 +45,9 @@ const ResumeForm = () => {
             imageUrl,
             workExperiences,
             educations,
-            title
+            title,
+            uid,
+            dateCreated:Date.now()
         };
         let firebase = new Firebase();
         firebase.addResume(newResume);

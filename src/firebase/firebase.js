@@ -41,7 +41,8 @@ class Firebase {
 
 //   getUser = uid => getDoc(doc(this.firestore, 'users', uid));
 
-  addResume = (data) => setDoc(doc(this.firestore, 'resumes', `${data.firstName}`), data);
+// to change to this after adding email addResume = (data) => setDoc(doc(this.firestore, 'resumes', `${data.dateCreated}_${data.email}`), data);
+  addResume = (data) => setDoc(doc(this.firestore, 'resumes', `${data.dateCreated}_${data.firstName}`), data);
 
   getResume = rid => getDoc(doc(this.firestore, 'resumes', rid));
 
