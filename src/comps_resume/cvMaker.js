@@ -11,8 +11,8 @@ const Cv = ({ firstName, lastName, imageUrl, educations, workExperiences, title 
     };
 
     return (
-        <div className="container col-10 bg-dark" id="pdf-container" >
-   <div className="row">
+        <div className="container col-10 bg-dark" id="pdf-container"  >
+            <div className="row">
                 <div className='text-white w-75 p-4'>
                     {/* Main Content */}
                     <header className="mt-4 text-center">
@@ -48,7 +48,7 @@ const Cv = ({ firstName, lastName, imageUrl, educations, workExperiences, title 
                     />
                 </div>
             </div>
-            
+
         </div>
     );
 };
