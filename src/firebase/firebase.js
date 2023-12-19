@@ -20,26 +20,26 @@ class Firebase {
     this.firestore = getFirestore();
   }
 
-  signUp = (email, password) =>
-    createUserWithEmailAndPassword(this.auth, email, password);
+//   signUp = (email, password) =>
+//     createUserWithEmailAndPassword(this.auth, email, password);
 
-  signIn = (email, password) =>
-    signInWithEmailAndPassword(this.auth, email, password);
+//   signIn = (email, password) =>
+//     signInWithEmailAndPassword(this.auth, email, password);
 
-  signOut = () => signOut(this.auth);
+//   signOut = () => signOut(this.auth);
 
-  sendEmailVerificationLink = () =>
-    sendEmailVerification(this.auth.currentUser, {
-      url: process.env.REACT_APP_EMAIL_CONFIRMATION_REDIRECT,
-    });
+//   sendEmailVerificationLink = () =>
+//     sendEmailVerification(this.auth.currentUser, {
+//       url: process.env.REACT_APP_EMAIL_CONFIRMATION_REDIRECT,
+//     });
 
-  resetPassword = email => sendPasswordResetEmail(this.auth, email);
+//   resetPassword = email => sendPasswordResetEmail(this.auth, email);
 
-  updatePassword = password => updatePassword(this.auth.currentUser, password);
+//   updatePassword = password => updatePassword(this.auth.currentUser, password);
 
-  addUser = (uid, data) => setDoc(doc(this.firestore, 'users', uid), data);
+//   addUser = (uid, data) => setDoc(doc(this.firestore, 'users', uid), data);
 
-  getUser = uid => getDoc(doc(this.firestore, 'users', uid));
+//   getUser = uid => getDoc(doc(this.firestore, 'users', uid));
 
   addResume = (data) => setDoc(doc(this.firestore, 'resumes', `${data.firstName}`), data);
 
