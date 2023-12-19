@@ -2,26 +2,29 @@ import React, { useState } from 'react';
 import { Button } from 'reactstrap';
 import { pdfGenerate } from './pdfDownloadButton';
 
-const DarkResume = ({ Resume }) => {
+const ColorfulResume = ({ Resume }) => {
     const [showButton, setShowButton] = useState(true);
 
     const handleImageLoad = () => {
         setShowButton(true);
     };
     return (
-        <div className="container"  id="pdf-container" >
+        <div className="container" id="pdf-container" style={{ backgroundColor: "#FCECEC" }}>
 
             <div className="row mx-5">
                 <div className="text-white w-75">
                     {/* Main Content */}
-                    <header className="mt-4 text-center">
-                        <h1 style={{ color: 'purple' }}>
+                    <header className="mt-4">
+                        <h1 className='display-4' style={{ color: 'purple', fontWeight: 'bold' }}>
                             {`${Resume.firstName} ${Resume.lastName}`}
                         </h1>
-                        <p className="lead" style={{ color: 'orange' }}>{`${Resume.title}`}</p>
+                        <p className="lead" style={{ color: 'orange', fontWeight: 600, fontSize: '30px' }}>
+                            {`${Resume.title}`}
+                        </p>
+
                     </header>
 
-                    <section className="education mt-4">
+                    <section className="education mt-4  bg-white rounded p-3" style={{ backgroundColor: 'rgba(255, 255, 255, 0.80)' }}>
                         <h2 style={{ color: 'pink' }}>Education</h2>
                         {Resume.educations.map((education, index) => (
                             <div key={index}>
@@ -32,7 +35,7 @@ const DarkResume = ({ Resume }) => {
                             </div>
                         ))}
                     </section>
-                    <section className="experience mt-4">
+                    <section className="experience mt-4 rounded p-3" style={{ backgroundColor: 'rgba(255, 255, 255, 0.80)' }}>
                         <h2 style={{ color: 'pink' }}>Work Experience</h2>
                         {Resume.workExperiences.map((experience, index) => (
                             <p key={index} style={{ color: 'pink' }}>{experience.jobTitle} - {experience.startDate} to {experience.endDate}</p>
@@ -40,18 +43,19 @@ const DarkResume = ({ Resume }) => {
                     </section>
                 </div>
 
-                <div className="col-6 w-25 mt-5">
+                <div className="col-6 w-25">
                     <img
-                        src={Resume.imageUrl} // Use the provided image URL
+                        src={Resume.imageUrl}
                         alt={`${Resume.firstName} ${Resume.lastName}`}
-                        className="img-fluid mt-5 flex-end"
-                        onLoad={handleImageLoad} // Add onload event to trigger when the image is loaded
+                        className="img-fluid mt-5 flex-end rounded"
+                        onLoad={handleImageLoad}
                     />
                 </div>
+
             </div>
         </div>
 
     )
 }
 
-export default DarkResume
+export default ColorfulResume
