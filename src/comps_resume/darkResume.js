@@ -1,15 +1,8 @@
-// Cv.js
 import React, { useState } from 'react';
 import { Button } from 'reactstrap';
 import { pdfGenerate } from './pdfDownloadButton';
 
-const Cv = ({ firstName, lastName, imageUrl, educations, workExperiences, title }) => {
-    const [showButton, setShowButton] = useState(true);
-
-    const handleImageLoad = () => {
-        setShowButton(true);
-    };
-
+const darkResume = () => {
     return (
         <div className="container col-10 bg-dark" id="pdf-container"  >
             <div className="row">
@@ -48,9 +41,8 @@ const Cv = ({ firstName, lastName, imageUrl, educations, workExperiences, title 
                     />
                 </div>
             </div>
-        </div>
-    );
-};
 
-export default Cv;
+        </div>)
+}
 
+export default darkResume

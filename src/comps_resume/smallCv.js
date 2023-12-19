@@ -5,7 +5,7 @@ const SmallResume = ({ resume }) => {
   const { id, firstName, lastName, imageUrl, educationArr, workExperienceArr, title } = resume;
 
   return (
-    <div key={id} className="container col-10 bg-dark">
+    <div key={id} className="container col-10 bg-dark m-5 w-25">
       <div className="row">
         <div className='text-white w-75 p-4'>
           <header className="mt-4 text-center">
@@ -50,6 +50,7 @@ const SmallResume = ({ resume }) => {
         </div>
       </div>
     </div>
+    
   );
 };
 

@@ -186,10 +186,20 @@ const ResumeForm = () => {
                         workExperiences={workExperiences}
                         educations={educations}
                         title={title}
+                        
                     />
                 </div>
                 <div className='container ms-5 mt-4'>
+                    <div className='mb-5 mt-2'>
 
+                <Button className='me-2'>Classic</Button>
+                <Button className='mx-2'>Modern</Button>
+                <Button className='mx-2'>Artist</Button>
+                <Button className='mx-2'>Dark</Button>
+                <Button className='mx-2'>Colerfull</Button>
+                <br></br>
+
+                    </div>
                 <Button onClick={() => pdfGenerate(firstName, lastName, educations, workExperiences, title)} className='btn btn-success'>
                     Download PDF
                 </Button>

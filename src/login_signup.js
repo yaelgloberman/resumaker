@@ -60,8 +60,8 @@ export default function AuthForm() {
           </div>
         </div>
         <div className="d-flex justify-content-center mt-5 ">
-          <button type="submit" className='btn btn-success col-4 mx-2' onClick={() => handleLogin(false)}>Log in</button>
-          <button type="submit" className='btn btn-primary col-4 mx-2' onClick={() => handleLogin(true)}>Sign up</button>
+          <button type="submit" className='btn btn-success col-4 mx-2' onClick={() => handleLogin(true)}>Log in</button>
+          <button type="submit" className='btn btn-primary col-4 mx-2' onClick={() => handleLogin(false)}>Sign up</button>
         </div>
       </form>
     </div>
