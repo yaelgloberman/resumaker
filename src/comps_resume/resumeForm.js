@@ -2,9 +2,10 @@ import React, { useState } from 'react';
 import CvMaker from './cvMaker'
 const ResumeForm = () => {
     const [allResumes, setAllResumes] = useState([]);
-    const [firstName, setFirstName] = useState('');
+    const [firstName, setFirstName] = useState('Full name');
     const [lastName, setLastName] = useState('');
-    const [imageUrl, setImageUrl] = useState('');
+    const [imageUrl, setImageUrl] = useState('https://images.pexels.com/photos/771742/pexels-photo-771742.jpeg?auto=compress&cs=tinysrgb&w=600');
+    const [title, setTitle] = useState('Title');
     const [workExperiences, setWorkExperiences] = useState([{ jobTitle: '', startDate: '', endDate: '' }]);
     const [educations, setEducations] = useState([{ name: '', startDate: '', endDate: '', degree: '' }]);
     const [isSubmitted, setIsSubmitted] = useState(false);
@@ -39,6 +40,7 @@ const ResumeForm = () => {
             imageUrl,
             workExperiences,
             educations,
+            title
         };
 
         // Add the new resume to the array of all resumes
@@ -51,21 +53,14 @@ const ResumeForm = () => {
 
     return (
         <div className=" container d-flex justify-content-start mt-4">
-            <div className='col-6 bg-danger'>
-                {isSubmitted ? (
-                    <CvMaker
-                        firstName={firstName}
-                        lastName={lastName}
-                        imageUrl={imageUrl}
-                        workExperiences={workExperiences}
-                        educations={educations}
-                    />
-                ) : (
+            <div className='col-5 '>
+               
                     <form onSubmit={handleSubmit} className='col-11 px-5 py-3'>
                         <label><b>Info:</b></label>
                         <input type="text" className='form-control my-2' placeholder='first name' value={firstName} onChange={(e) => setFirstName(e.target.value)} />
                         <input type="text" className='form-control my-2' placeholder='Last Name' value={lastName} onChange={(e) => setLastName(e.target.value)} />
                         <input type="text" className='form-control my-2' placeholder='Profile Picture' value={imageUrl} onChange={(e) => setImageUrl(e.target.value)} />
+                        <input type="text" className='form-control my-2' placeholder='Title Picture' value={title} onChange={(e) => setTitle(e.target.value)} />
                         <div className="work-experience  mt-3">
                             <label><b>Work Experience:</b></label>
                             {workExperiences.map((experience, index) => (
@@ -130,7 +125,6 @@ const ResumeForm = () => {
                                         <option value="High School Diploma">High School Diploma</option>
                                         <option value="Bachelor's Degree">Bachelor's Degree</option>
                                         <option value="Master's Degree">Master's Degree</option>
-                                        {/* Add more degree options as needed */}
                                     </select>
                                     <div className="row my-3">
                                         <div className="row">
@@ -169,10 +163,17 @@ const ResumeForm = () => {
 
 
                     </form>
-                )}
+                
             </div>
-            <div className='bg-dark col-6'>
-
+            <div className='bg-dark col-7 '>
+            <CvMaker
+                        firstName={firstName}
+                        lastName={lastName}
+                        imageUrl={imageUrl}
+                        workExperiences={workExperiences}
+                        educations={educations}
+                        title={title}
+                    />
             </div>
         </div>
     );
