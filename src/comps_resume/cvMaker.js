@@ -5,7 +5,7 @@ import DarkStyle from './darkResume';
 import ColorfulStyle from './colorfulResume';
 import ClassicStyle from './classicResume';
 import ArtistStyle from './artistResume';
-import ModernStyle from './modernResume'; // Added import for ModernStyle
+import ModernStyle from './modernResume';
 
 const Cv = ({ firstName, lastName, imageUrl, educations, workExperiences, title, cvStyle }) => {
     const [showButton, setShowButton] = useState(true);
@@ -19,7 +19,8 @@ const Cv = ({ firstName, lastName, imageUrl, educations, workExperiences, title,
         imageUrl,
         workExperiences,
         educations,
-        title
+        title,
+        cvStyle
     }
     return (
         <div id="pdf-container">

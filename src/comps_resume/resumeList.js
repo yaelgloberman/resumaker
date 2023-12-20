@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Firebase from '../firebase/firebase';
-import SmallResume from './smallCv';
+// import SmallResume from './smallCv';
+import CvMaker from './cvMaker'
 import { useAuth } from '../hooks/authContext';
 
 export default function FireLiveToys() {
@@ -37,7 +38,17 @@ export default function FireLiveToys() {
         <p>Loading...</p>
       ) : (
         resumes.map((resume) => (
-          <SmallResume key={resume.id} resume={resume} />
+          <div >
+          <CvMaker
+              firstName={resume.firstName}
+              lastName={resume.lastName}
+              imageUrl={resume.imageUrl}
+              workExperiences={resume.workExperiences}
+              educations={resume.educations}
+              title={resume.title}
+              cvStyle={resume.cvStyle}
+          />
+      </div>
         ))
       )}
     </div>

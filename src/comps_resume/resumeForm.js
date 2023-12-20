@@ -54,7 +54,8 @@ const ResumeForm = () => {
             imageUrl,
             workExperiences,
             educations,
-            title
+            title,
+            cvStyle
         };
         let firebase = new Firebase();
         firebase.addResume(newResume);
@@ -192,7 +193,6 @@ const ResumeForm = () => {
                         educations={educations}
                         title={title}
                         cvStyle={cvStyle}
-
                     />
                 </div>
                 <div className='container ms-5 mt-4 d-flex flex-column align-items-center'>
