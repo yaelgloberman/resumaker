@@ -9,7 +9,6 @@ import {
   updatePassword,
 } from 'firebase/auth';
 import { getFirestore, doc, setDoc, getDoc, collection, getDocs, query, where } from 'firebase/firestore';
-
 import firebaseConfig from './config2';
 
 class Firebase {
@@ -19,23 +18,6 @@ class Firebase {
     this.auth = getAuth();
     this.firestore = getFirestore();
   }
-
-//   signUp = (email, password) =>
-//     createUserWithEmailAndPassword(this.auth, email, password);
-
-//   signIn = (email, password) =>
-//     signInWithEmailAndPassword(this.auth, email, password);
-
-//   signOut = () => signOut(this.auth);
-
-//   sendEmailVerificationLink = () =>
-//     sendEmailVerification(this.auth.currentUser, {
-//       url: process.env.REACT_APP_EMAIL_CONFIRMATION_REDIRECT,
-//     });
-
-//   resetPassword = email => sendPasswordResetEmail(this.auth, email);
-
-//   updatePassword = password => updatePassword(this.auth.currentUser, password);
 
 addUser = (uid, data) => setDoc(doc(this.firestore, 'users', uid), data);
 

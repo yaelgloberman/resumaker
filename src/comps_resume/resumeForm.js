@@ -1,10 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import CvMaker from './cvMaker'
 import Firebase from '../firebase/firebase';
 import { Button } from 'reactstrap';
 import { pdfGenerate } from './pdfDownloadButton';
 import { useAuth } from '../hooks/authContext';
-
+import { use } from 'bcrypt/promises';
+import { storage } from '../firebase/config'
+import { ref, uploadBytes } from 'firebase/storage'
+import { v4 } from "uuid"
 const ResumeForm = () => {
     const { userId } = useAuth();
     const [allResumes, setAllResumes] = useState([]);
@@ -17,6 +20,8 @@ const ResumeForm = () => {
     const [educations, setEducations] = useState([{ name: '', startDate: '', endDate: '', degree: '' }]);
     const [isSubmitted, setIsSubmitted] = useState(false);
     const [uid, setUid] = useState('123');
+    const [imageUpload, setImageUpload] = useState(null);
+    const [imageList,setImageList]=useState([]);
 
     const handleStyleButtonClick = (style) => {
         setCv(style);
@@ -66,6 +71,17 @@ const ResumeForm = () => {
         console.log('Submitted data:', newResume);
         setIsSubmitted(true);
     };
+    const uploadImage = () => {
+        if (imageUpload == null) return;
+        const imageRef = ref(storage, `images/${imageUpload.name + v4()}`);
+        uploadBytes(imageRef, imageUpload).then(() => {
+            alert("upload image")
+
+        });
+    }
+    useEffect(() => { 
+
+    },[])
 
     return (
         <div className=" container d-flex justify-content-start mt-4">
@@ -75,7 +91,8 @@ const ResumeForm = () => {
                     <label><b>Info:</b></label>
                     <input type="text" className='form-control my-2' placeholder='first name' value={firstName} onChange={(e) => setFirstName(e.target.value)} />
                     <input type="text" className='form-control my-2' placeholder='Last Name' value={lastName} onChange={(e) => setLastName(e.target.value)} />
-                    <input type="text" className='form-control my-2' placeholder='Profile Picture' value={imageUrl} onChange={(e) => setImageUrl(e.target.value)} />
+                    <input type="file" onChange={(event) => { setImageUpload(event.target.files[0]) }} className='form-control my-2' placeholder='Profile Picture' value={imageUrl} />
+                    <button onClick={uploadImage}>Upload image</button>
                     <input type="text" className='form-control my-2' placeholder='Title Picture' value={title} onChange={(e) => setTitle(e.target.value)} />
                     <div className="work-experience  mt-3">
                         <label><b>Work Experience:</b></label>
@@ -192,7 +209,6 @@ const ResumeForm = () => {
                         educations={educations}
                         title={title}
                         cvStyle={cvStyle}
-
                     />
                 </div>
                 <div className='container ms-5 mt-4 d-flex flex-column align-items-center'>
