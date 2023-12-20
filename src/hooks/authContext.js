@@ -1,6 +1,5 @@
-// AuthContext.js
 import React, { createContext, useContext, useEffect, useState } from 'react';
-import { onAuthStateChanged, signOut, signInWithEmailAndPassword } from 'firebase/auth';
+import { onAuthStateChanged, signOut, signInWithEmailAndPassword, createUserWithEmailAndPassword } from 'firebase/auth';
 import { database } from '../firebase/config';
 
 const AuthContext = createContext();
@@ -24,7 +23,19 @@ export const AuthProvider = ({ children }) => {
     } catch (err) {
       console.error("Login error:", err.message);
       setIsAuthenticated(false);
-      throw err; // Propagate the error for handling in the component
+      throw err;
+    }
+  };
+
+  const signup = async (email, password) => {
+    try {
+      await createUserWithEmailAndPassword(database, email, password);
+      console.log("User signed up");
+      setIsAuthenticated(true);
+    } catch (err) {
+      console.error("Signup error:", err.message);
+      setIsAuthenticated(false);
+      throw err;
     }
   };
 
@@ -39,7 +50,7 @@ export const AuthProvider = ({ children }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ isAuthenticated, login, logout }}>
+    <AuthContext.Provider value={{ isAuthenticated, login, signup, logout }}>
       {children}
     </AuthContext.Provider>
   );
