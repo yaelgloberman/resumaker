@@ -13,7 +13,7 @@ const ClassicResume = ({ Resume }) => {
         <div className="container" id="pdf-container" style={{
             background: 'rgb(210, 246, 255)',
             background: 'linear-gradient(29deg, rgba(210, 246, 255, 1) 16%, rgba(56, 182, 237, 1) 35%, rgba(54, 75, 255, 1) 100%)',
-            padding: '20px',
+            padding: '20px', width: '210mm', height: '297mm'
         }}>
 
             <div className="row">

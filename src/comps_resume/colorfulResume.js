@@ -9,7 +9,7 @@ const ColorfulResume = ({ Resume }) => {
         setShowButton(true);
     };
     return (
-        <div className="container" id="pdf-container" style={{ backgroundColor: "#FCECEC" }}>
+        <div className="container" id="pdf-container" style={{ backgroundColor: "#FCECEC", width: '210mm', height: '297mm' }}>
 
             <div className="row mx-5">
                 <div className="text-white w-75">

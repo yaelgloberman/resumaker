@@ -8,9 +8,8 @@ const DarkResume = ({ Resume }) => {
     const handleImageLoad = () => {
         setShowButton(true);
     };
-
     return (
-        <div className="container" id="pdf-container" style={{ backgroundColor: "#1A1A1A", color: "#FFFFFF" }}>
+        <div className="container" id="pdf-container" style={{ backgroundColor: "#1A1A1A", color: "#FFFFFF", width: '210mm', height: '297mm'}}>
 
             <div className="row mx-5">
                 <div className="text-white w-75">
