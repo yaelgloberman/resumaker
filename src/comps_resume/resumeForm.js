@@ -18,7 +18,7 @@ const ResumeForm = () => {
 
     const handleStyleButtonClick = (style) => {
         setCv(style);
-        {console.log("style",style);}
+        { console.log("style", style); }
     };
     const handleAddWorkExperience = () => {
         setWorkExperiences([...workExperiences, { jobTitle: '', startDate: '', endDate: '' }]);
@@ -195,21 +195,21 @@ const ResumeForm = () => {
 
                     />
                 </div>
-                <div className='container ms-5 mt-4'>
-                    <div className='mb-5 mt-2'>
-
-                        <Button className='me-2' onClick={() => handleStyleButtonClick('Classic')}>Classic</Button>
-                        <Button className='mx-2' onClick={() => handleStyleButtonClick('Modern')}>Modern</Button>
-                        <Button className='mx-2' onClick={() => handleStyleButtonClick('Artist')}>Artist</Button>
-                        <Button className='mx-2' onClick={() => handleStyleButtonClick('Dark')}>Dark</Button>
-                        <Button className='mx-2' onClick={() => handleStyleButtonClick('Colorful')}>Colorful</Button>
-                        <br></br>
-
+                <div className='container ms-5 mt-4 d-flex flex-column align-items-center'>
+                    <div className='mb-4 mt-2 d-flex justify-content-center'>
+                        <button className='mx-3 btn btn-outline-primary' onClick={() => handleStyleButtonClick('Classic')}>Classic</button>
+                        <button className='mx-3 btn btn-outline-success' onClick={() => handleStyleButtonClick('Modern')}>Modern</button>
+                        <button className='mx-3 btn btn-outline-danger' onClick={() => handleStyleButtonClick('Artist')}>Artist</button>
+                        <button className='mx-3 btn btn-outline-dark' onClick={() => handleStyleButtonClick('Dark')}>Dark</button>
+                        <button className='mx-3 btn btn-outline-warning' onClick={() => handleStyleButtonClick('Colorful')}>Colorful</button>
                     </div>
+
                     <Button onClick={() => pdfGenerate(firstName, lastName, educations, workExperiences, title, cvStyle)} className='btn btn-success'>
                         Download PDF
                     </Button>
                 </div>
+
+
             </div>
         </div>
     );
