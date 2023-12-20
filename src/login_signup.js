@@ -1,42 +1,32 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
-import { database } from './firebase/config';
+import { useAuth } from './hooks/authContext';
 
 export default function AuthForm() {
   const [login, setLogin] = useState(false);
+  const { login: authLogin } = useAuth();
   const navigate = useNavigate();
 
-  const handleLogin = (isLogin) => {
-    console.log("login", isLogin);
+  const handleLogin = async (isLogin) => {
     setLogin(isLogin);
   };
 
-  const handleSubmit = (e, type) => {
+  const handleSubmit = async (e, type) => {
     e.preventDefault();
     const email = e.target.email.value;
     const password = e.target.password.value;
 
-    if (type === "signup") {
-      createUserWithEmailAndPassword(database, email, password)
-        .then((data) => {
-          console.log(data, "authData");
-          navigate("/resumeForm");
-        })
-        .catch((err) => {
-          alert(err.code);
-          setLogin(true);
-        });
+    try {
+      await authLogin(email, password);
 
-    } else {
-      signInWithEmailAndPassword(database, email, password)
-        .then((data) => {
-          console.log(data, "authData");
-          navigate("/appResume");
-        })
-        .catch((err) => {
-          alert(err.code);
-        });
+      if (type === "signup") {
+        navigate("/resumeForm");
+      } else {
+        navigate("/appResume");
+      }
+    } catch (err) {
+      alert(err.code);
+      setLogin(true);
     }
   };
 
@@ -45,7 +35,7 @@ export default function AuthForm() {
   };
 
   return (
-    <div className='container m-5'>
+        <div className='container m-5'>
       <form onSubmit={(e) => handleSubmit(e, login ? "signin" : "signup")}>
         <div className="row mb-3">
           <label htmlFor="email" className="col-sm-2 col-form-label ">Email:</label>
