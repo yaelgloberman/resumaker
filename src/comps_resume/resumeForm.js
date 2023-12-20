@@ -90,10 +90,10 @@ const ResumeForm = () => {
     }, [imageUpload])
 
     return (
-        <div className=" container d-flex justify-content-start mt-4">
+        <div className=" container d-flex justify-content-start mt-4" >
             <div className='col-5 '>
 
-                <form onSubmit={handleSubmit} className='col-11 px-5 py-3'>
+            <form onSubmit={handleSubmit} className='col-11 px-5 py-3' style={{ minHeight: '1200px' }}>
                     <label><b>Info:</b></label>
                     <input type="text" className='form-control my-2' placeholder='first name' value={firstName} onChange={(e) => setFirstName(e.target.value)} />
                     <input type="text" className='form-control my-2' placeholder='Last Name' value={lastName} onChange={(e) => setLastName(e.target.value)} />
