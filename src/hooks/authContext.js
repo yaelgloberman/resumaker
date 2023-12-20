@@ -1,6 +1,8 @@
+// AuthContext.js
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import { onAuthStateChanged, signOut, signInWithEmailAndPassword, createUserWithEmailAndPassword } from 'firebase/auth';
 import { database } from '../firebase/config';
+import { collection, onSnapshot } from "firebase/firestore";
 
 const AuthContext = createContext();
 
@@ -49,8 +51,25 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
+  const getCollectionData = async (collectionName) => {
+    try {
+      let ref = collection(database, collectionName);
+      const snapshot = await onSnapshot(ref);
+
+      let fire_ar = [];
+      snapshot.docs.forEach(item => {
+        fire_ar.push({ id: item.id, ...item.data() });
+      });
+
+      return fire_ar;
+    } catch (err) {
+      console.error("Fetch collection error:", err.message);
+      throw err;
+    }
+  };
+
   return (
-    <AuthContext.Provider value={{ isAuthenticated, login, signup, logout }}>
+    <AuthContext.Provider value={{ isAuthenticated, login, signup, logout, getCollectionData }}>
       {children}
     </AuthContext.Provider>
   );
@@ -63,3 +82,4 @@ export const useAuth = () => {
   }
   return context;
 };
+
