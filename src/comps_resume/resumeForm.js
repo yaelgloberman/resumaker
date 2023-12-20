@@ -48,6 +48,7 @@ const ResumeForm = () => {
         // Create a new resume object
         const newResume = {
             userId,
+            dateCreated: Date.now(),
             firstName,
             lastName,
             imageUrl,
@@ -57,10 +58,6 @@ const ResumeForm = () => {
         };
         let firebase = new Firebase();
         firebase.addResume(newResume);
-        firebase.getAllResumes().then((resumes) => {
-            console.log("resume");
-            console.log(resumes);
-        });
 
         // Add the new resume to the array of all resumes
         setAllResumes([...allResumes, newResume]);
