@@ -3,12 +3,12 @@ import React, { useEffect, useState } from 'react';
 import Form from "./comps/form";
 import Home from "./comps/home";
 import Header from "./comps_static/header";
+import Footer from "./comps_static/footer";
 import './App.css';
 
 import AppResume from "./comps_resume/app_resume";
 import ResumeForm from "./comps_resume/resumeForm";
 import Users from "./comps_users/app_users"
-import CV from "./cv"
 import ResumeList from "./comps_resume/resumeList"
 import LoginSignup from "./login_signup"
 
@@ -44,6 +44,7 @@ function App() {
           {/* Add your 404 route here if needed */}
           <Route path="*" element={<h2>Page 404, not found!</h2>} />
         </Routes>
+        <Footer />
       </AuthProvider>
     </BrowserRouter>
   );
