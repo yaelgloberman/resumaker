@@ -2,7 +2,7 @@
 import React from 'react';
 
 const SmallResume = ({ resume }) => {
-  const { id, firstName, lastName, imageUrl, educationArr, workExperienceArr, title } = resume;
+  const { id, firstName, lastName, imageUrl, educationArr, workExperienceArr, title, cvStyle } = resume;
 
   return (
     <div key={id} className="container col-10 bg-dark m-5 w-25">

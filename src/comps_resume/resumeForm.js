@@ -6,8 +6,8 @@ import { pdfGenerate } from './pdfDownloadButton';
 import { useAuth } from '../hooks/authContext';
 import { use } from 'bcrypt/promises';
 import { storage } from '../firebase/config'
-import { ref, uploadBytes } from 'firebase/storage'
-import { v4 } from "uuid"
+import { listAll, ref, uploadBytes, getDownloadURL } from 'firebase/storage'
+import uuid4 from "uuid4"
 const ResumeForm = () => {
     const { userId } = useAuth();
     const [allResumes, setAllResumes] = useState([]);
@@ -21,7 +21,7 @@ const ResumeForm = () => {
     const [isSubmitted, setIsSubmitted] = useState(false);
     const [uid, setUid] = useState('123');
     const [imageUpload, setImageUpload] = useState(null);
-    const [imageList,setImageList]=useState([]);
+    const [imageList, setImageList] = useState([]);
 
     const handleStyleButtonClick = (style) => {
         setCv(style);
@@ -59,7 +59,8 @@ const ResumeForm = () => {
             imageUrl,
             workExperiences,
             educations,
-            title
+            title,
+            cvStyle
         };
         let firebase = new Firebase();
         firebase.addResume(newResume);
@@ -71,17 +72,22 @@ const ResumeForm = () => {
         console.log('Submitted data:', newResume);
         setIsSubmitted(true);
     };
+    // const imageListRef = ref(storage, "images/")
     const uploadImage = () => {
         if (imageUpload == null) return;
-        const imageRef = ref(storage, `images/${imageUpload.name + v4()}`);
-        uploadBytes(imageRef, imageUpload).then(() => {
-            alert("upload image")
-
+        const imageRef = ref(storage, `images/${imageUpload.name + uuid4()}`);
+        uploadBytes(imageRef, imageUpload).then((snapshot) => {
+            getDownloadURL(snapshot.ref).then((url) => {
+                setImageUrl(url);
+            })
+            // alert("hi")
         });
     }
-    useEffect(() => { 
-
-    },[])
+    useEffect(() => {
+        if (imageUpload) {
+            uploadImage();
+        }
+    }, [imageUpload])
 
     return (
         <div className=" container d-flex justify-content-start mt-4">
@@ -91,8 +97,7 @@ const ResumeForm = () => {
                     <label><b>Info:</b></label>
                     <input type="text" className='form-control my-2' placeholder='first name' value={firstName} onChange={(e) => setFirstName(e.target.value)} />
                     <input type="text" className='form-control my-2' placeholder='Last Name' value={lastName} onChange={(e) => setLastName(e.target.value)} />
-                    <input type="file" onChange={(event) => { setImageUpload(event.target.files[0]) }} className='form-control my-2' placeholder='Profile Picture' value={imageUrl} />
-                    <button onClick={uploadImage}>Upload image</button>
+                    <input type="file" onChange={(event) => { setImageUpload(event.target.files[0]) }} className='form-control my-2' />
                     <input type="text" className='form-control my-2' placeholder='Title Picture' value={title} onChange={(e) => setTitle(e.target.value)} />
                     <div className="work-experience  mt-3">
                         <label><b>Work Experience:</b></label>
