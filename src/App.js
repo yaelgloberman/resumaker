@@ -29,14 +29,12 @@ function App() {
         <Routes >
           <Route path="/" element={<Home />} />
           <Route path="/loginSignup" element={<PublicRoute element={<LoginSignup />} />} />
-          <Route path="/form" element={<PrivateRoute element={<Form />} />} />
           <Route path="/appResume" element={<PrivateRoute element={<AppResume />} />} />
           <Route path="/resumeForm" element={<PrivateRoute element={<ResumeForm />} />} />
           <Route path="/resumeList" element={<PrivateRoute element={<ResumeList />} />} />
           {/* Add your 404 route here if needed */}
           <Route path="*" element={<h2>Page 404, not found!</h2>} />
         </Routes>
-        <Footer />
       </AuthProvider>
     </BrowserRouter>
   );
