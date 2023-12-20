@@ -1,15 +1,28 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import { onAuthStateChanged, signOut, signInWithEmailAndPassword, createUserWithEmailAndPassword } from 'firebase/auth';
-import { database } from '../firebase/config';
+import { getFirestore, doc, setDoc, getDoc, collection, getDocs } from 'firebase/firestore';
+import { auth, database } from '../firebase/config';
 
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [role, setRole] = useState(null);
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(database, (user) => {
+    const unsubscribe = onAuthStateChanged(auth, async (user) => {
       setIsAuthenticated(!!user);
+
+      if (user) {
+        // If the user is authenticated, fetch the role from Firestore
+        const userDoc = await getDoc(doc(database, 'users', user.email));
+        if (userDoc.exists()) {
+          setRole(userDoc.data().role);
+        }
+      } else {
+        // If not authenticated, reset the role
+        setRole(null);
+      }
     });
 
     return () => unsubscribe();
@@ -17,7 +30,7 @@ export const AuthProvider = ({ children }) => {
 
   const login = async (email, password) => {
     try {
-      await signInWithEmailAndPassword(database, email, password);
+      await signInWithEmailAndPassword(auth, email, password);
       console.log("User logged in");
       setIsAuthenticated(true);
     } catch (err) {
@@ -29,9 +42,12 @@ export const AuthProvider = ({ children }) => {
 
   const signup = async (email, password) => {
     try {
-      await createUserWithEmailAndPassword(database, email, password);
+      const uid = email;
+      await createUserWithEmailAndPassword(auth, email, password);
+      await addUser(uid, { email, password, role: "user" });
       console.log("User signed up");
       setIsAuthenticated(true);
+      setRole("user");
     } catch (err) {
       console.error("Signup error:", err.message);
       setIsAuthenticated(false);
@@ -41,16 +57,19 @@ export const AuthProvider = ({ children }) => {
 
   const logout = async () => {
     try {
-      await signOut(database);
+      await signOut(auth);
       console.log("User logged out");
       setIsAuthenticated(false);
+      setRole(null);
     } catch (err) {
       console.error("Logout error:", err.message);
     }
   };
 
+  const addUser = (uid, data) => setDoc(doc(database, 'users', uid), data);
+
   return (
-    <AuthContext.Provider value={{ isAuthenticated, login, signup, logout }}>
+    <AuthContext.Provider value={{ isAuthenticated, role, login, signup, logout }}>
       {children}
     </AuthContext.Provider>
   );

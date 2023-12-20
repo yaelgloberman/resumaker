@@ -37,9 +37,9 @@ class Firebase {
 
 //   updatePassword = password => updatePassword(this.auth.currentUser, password);
 
-//   addUser = (uid, data) => setDoc(doc(this.firestore, 'users', uid), data);
+addUser = (uid, data) => setDoc(doc(this.firestore, 'users', uid), data);
 
-//   getUser = uid => getDoc(doc(this.firestore, 'users', uid));
+getUser = uid => getDoc(doc(this.firestore, 'users', uid));
 
 // to change to this after adding email addResume = (data) => setDoc(doc(this.firestore, 'resumes', `${data.dateCreated}_${data.email}`), data);
   addResume = (data) => setDoc(doc(this.firestore, 'resumes', `${data.dateCreated}_${data.firstName}`), data);
