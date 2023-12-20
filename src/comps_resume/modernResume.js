@@ -20,7 +20,8 @@ const ModernResume = ({ Resume }) => {
                 background: 'linear-gradient(to bottom, #19514F, #1E7E34)',
                 color: '#D3D3D3',
                 padding: '20px',
-                fontFamily: 'Rubik, sans-serif', // Apply the specified font
+                fontFamily: 'Rubik, sans-serif',
+                width: '210mm', height: '297mm'
             }}>
                 <div className="row">
                     <div className='text-white col-8 p-4'>

@@ -1,7 +1,7 @@
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
 
-export const pdfGenerate = (firstName, lastName, educations, workExperiences, title) => {
+export const pdfGenerate = (firstName, lastName, educations, workExperiences, title, cvStyle) => {
     const pdfContainer = document.getElementById('pdf-container');
 
     html2canvas(pdfContainer).then((canvas) => {
