@@ -19,7 +19,7 @@ const ArtistResume = ({ Resume }) => {
             <div className="container" id="pdf-container" style={{
                 background: 'linear-gradient(45deg, #FF6B6B, #8A2387)',
                 color: 'white',
-                padding: '20px',
+                padding: '20px', width: '210mm', height: '297mm'
             }}>
 
                 <div className="row">
