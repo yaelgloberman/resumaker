@@ -4,7 +4,7 @@ import SmallResume from './smallCv';
 import { useAuth } from '../hooks/authContext';
 
 export default function FireLiveToys() {
-  const { userId } = useAuth();
+  const { userId, role } = useAuth();
   const [resumes, setResumes] = useState([]);
   const [loading, setLoading] = useState(true);
   const firebase = new Firebase();
@@ -13,7 +13,13 @@ export default function FireLiveToys() {
     // Fetch resumes when the component mounts
     const fetchResumes = async () => {
       try {
-        const resumesData = await firebase.getAllResumesOfUser(userId);
+        let resumesData=null;
+        if(role=="admin"){
+          resumesData = await firebase.getAllResumes();
+        }
+        else{
+          resumesData = await firebase.getAllResumesOfUser(userId);
+        }
         setResumes(resumesData);
         setLoading(false);
       } catch (error) {
