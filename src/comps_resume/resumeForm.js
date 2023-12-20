@@ -99,50 +99,6 @@ const ResumeForm = () => {
                     <input type="text" className='form-control my-2' placeholder='Last Name' value={lastName} onChange={(e) => setLastName(e.target.value)} />
                     <input type="file" onChange={(event) => { setImageUpload(event.target.files[0]) }} className='form-control my-2' />
                     <input type="text" className='form-control my-2' placeholder='Title Picture' value={title} onChange={(e) => setTitle(e.target.value)} />
-                    <div className="work-experience  mt-3">
-                        <label><b>Work Experience:</b></label>
-                        {workExperiences.map((experience, index) => (
-                            <div key={index}>
-                                <input
-                                    type="text"
-                                    className='form-control my-2'
-                                    placeholder='Job Title'
-                                    value={experience.jobTitle}
-                                    onChange={(e) => handleWorkExperienceChange(index, 'jobTitle', e.target.value)}
-                                />
-
-                                <div className="row my-2">
-                                    <div className="row">
-                                        <div className="col-2 mt-1">
-                                            <label>Start Date:</label>
-                                        </div>
-                                        <div className="col-4">
-                                            <input
-                                                type="date"
-                                                className="form-control"
-                                                value={experience.startDate}
-                                                onChange={(e) => handleWorkExperienceChange(index, 'startDate', e.target.value)}
-                                            />
-                                        </div>
-                                        <div className="col-2 mt-1 ">
-                                            <label>End Date:</label>
-                                        </div>
-                                        <div className="col-4">
-                                            <input
-                                                type="date"
-                                                className="form-control"
-                                                value={experience.endDate}
-                                                onChange={(e) => handleWorkExperienceChange(index, 'endDate', e.target.value)}
-                                            />
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </div>
-                        ))}
-                        <button type="button" className=' my-2 btn btn-outline-primary' onClick={handleAddWorkExperience}>Add Work Experience</button>
-                    </div>
-
                     <div className="education mt-3">
                         <label><b>Education:</b></label>
                         {educations.map((education, index) => (
@@ -197,6 +153,51 @@ const ResumeForm = () => {
                         <button type="button" className='my-2 btn btn-outline-primary' onClick={handleAddEducation}>Add Education</button>
 
                     </div>
+                    <div className="work-experience  mt-3">
+                        <label><b>Work Experience:</b></label>
+                        {workExperiences.map((experience, index) => (
+                            <div key={index}>
+                                <input
+                                    type="text"
+                                    className='form-control my-2'
+                                    placeholder='Job Title'
+                                    value={experience.jobTitle}
+                                    onChange={(e) => handleWorkExperienceChange(index, 'jobTitle', e.target.value)}
+                                />
+
+                                <div className="row my-2">
+                                    <div className="row">
+                                        <div className="col-2 mt-1">
+                                            <label>Start Date:</label>
+                                        </div>
+                                        <div className="col-4">
+                                            <input
+                                                type="date"
+                                                className="form-control"
+                                                value={experience.startDate}
+                                                onChange={(e) => handleWorkExperienceChange(index, 'startDate', e.target.value)}
+                                            />
+                                        </div>
+                                        <div className="col-2 mt-1 ">
+                                            <label>End Date:</label>
+                                        </div>
+                                        <div className="col-4">
+                                            <input
+                                                type="date"
+                                                className="form-control"
+                                                value={experience.endDate}
+                                                onChange={(e) => handleWorkExperienceChange(index, 'endDate', e.target.value)}
+                                            />
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        ))}
+                        <button type="button" className=' my-2 btn btn-outline-primary' onClick={handleAddWorkExperience}>Add Work Experience</button>
+                    </div>
+
+                  
                     <button type="submit" className='btn btn-success mt-3 mx-auto d-block'>Submit</button>
 
 

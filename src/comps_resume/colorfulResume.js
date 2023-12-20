@@ -35,7 +35,7 @@ const ColorfulResume = ({ Resume }) => {
                             </div>
                         ))}
                     </section>
-                    <section className="experience mt-4 rounded p-3" style={{ backgroundColor: 'rgba(255, 255, 255, 0.80)' }}>
+                    <section className="experience my-4 rounded p-3" style={{ backgroundColor: 'rgba(255, 255, 255, 0.80)' }}>
                         <h2 style={{ color: 'pink' }}>Work Experience</h2>
                         {Resume.workExperiences.map((experience, index) => (
                             <p key={index} style={{ color: 'pink' }}>{experience.jobTitle} - {experience.startDate} to {experience.endDate}</p>
