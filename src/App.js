@@ -38,7 +38,6 @@ function App() {
           <Route path="/loginSignup" element={<PublicRoute element={<LoginSignup />} />} />
           <Route path="/form" element={<PrivateRoute element={<Form />} />} />
           <Route path="/users" element={<PrivateRoute element={<Users />} />} />
-          <Route path="/cv" element={<PrivateRoute element={<CV />} />} />
           <Route path="/appResume" element={<PrivateRoute element={<AppResume />} />} />
           <Route path="/resumeForm" element={<PrivateRoute element={<ResumeForm />} />} />
           <Route path="/resumeList" element={<PrivateRoute element={<ResumeList />} />} />
