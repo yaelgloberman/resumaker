@@ -8,7 +8,7 @@ import {
   sendPasswordResetEmail,
   updatePassword,
 } from 'firebase/auth';
-import { getFirestore, doc, setDoc, getDoc, collection, getDocs } from 'firebase/firestore';
+import { getFirestore, doc, setDoc, getDoc, collection, getDocs, query, where } from 'firebase/firestore';
 
 import firebaseConfig from './config2';
 
@@ -56,6 +56,27 @@ getUser = uid => getDoc(doc(this.firestore, 'users', uid));
     });
 
     return resumes;
+  };
+
+  getAllResumesOfUser = async (uid) => {
+    const resumesCollection = collection(this.firestore, 'resumes');
+    
+    // Create a query to filter resumes based on userId
+    const q = query(resumesCollection, where('userId', '==', uid));
+  
+    try {
+      const querySnapshot = await getDocs(q);
+  
+      const resumes = [];
+      querySnapshot.forEach((doc) => {
+        resumes.push({ id: doc.id, ...doc.data() });
+      });
+  
+      return resumes;
+    } catch (error) {
+      console.error('Error getting resumes:', error.message);
+      throw error;
+    }
   };
 
 }

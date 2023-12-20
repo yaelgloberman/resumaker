@@ -8,6 +8,7 @@ const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [role, setRole] = useState(null);
+  const [userId, setUserId]= useState(null);
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (user) => {
@@ -18,10 +19,12 @@ export const AuthProvider = ({ children }) => {
         const userDoc = await getDoc(doc(database, 'users', user.email));
         if (userDoc.exists()) {
           setRole(userDoc.data().role);
+          setUserId(userDoc.data().email);
         }
       } else {
         // If not authenticated, reset the role
         setRole(null);
+        setUserId(null);
       }
     });
 
@@ -48,6 +51,7 @@ export const AuthProvider = ({ children }) => {
       console.log("User signed up");
       setIsAuthenticated(true);
       setRole("user");
+      setUserId(email)
     } catch (err) {
       console.error("Signup error:", err.message);
       setIsAuthenticated(false);
@@ -61,6 +65,7 @@ export const AuthProvider = ({ children }) => {
       console.log("User logged out");
       setIsAuthenticated(false);
       setRole(null);
+      setUserId(null)
     } catch (err) {
       console.error("Logout error:", err.message);
     }
@@ -69,7 +74,7 @@ export const AuthProvider = ({ children }) => {
   const addUser = (uid, data) => setDoc(doc(database, 'users', uid), data);
 
   return (
-    <AuthContext.Provider value={{ isAuthenticated, role, login, signup, logout }}>
+    <AuthContext.Provider value={{ isAuthenticated, role, userId, login, signup, logout }}>
       {children}
     </AuthContext.Provider>
   );

@@ -3,7 +3,7 @@ import React from 'react';
 import { useAuth } from '../hooks/authContext';
 
 function Footer() {
-  const { isAuthenticated, logout } = useAuth();
+  const { isAuthenticated, logout, userId } = useAuth();
 
   const handleLogout = async () => {
     await logout();
@@ -14,7 +14,7 @@ function Footer() {
     <div className='container'>
       {isAuthenticated && (
         <button className='btn btn-danger' onClick={handleLogout}>
-          Logout
+          Logout {userId}
         </button>
       )}
     </div>
