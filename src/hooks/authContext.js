@@ -1,8 +1,6 @@
-// authContext.js
 import React, { createContext, useContext, useEffect, useState } from 'react';
-import { onAuthStateChanged } from 'firebase/auth'; // Import necessary functions from Firebase auth
-import {database} from "../firebase/config"
-
+import { onAuthStateChanged, signOut, signInWithEmailAndPassword, createUserWithEmailAndPassword } from 'firebase/auth';
+import { database } from '../firebase/config';
 
 const AuthContext = createContext();
 
@@ -10,31 +8,58 @@ export const AuthProvider = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   useEffect(() => {
-    // Check the authentication state using Firebase or your chosen authentication mechanism
     const unsubscribe = onAuthStateChanged(database, (user) => {
-      // If the user is logged in, set isAuthenticated to true; otherwise, set it to false
       setIsAuthenticated(!!user);
     });
 
-    // Clean up the subscription when the component unmounts
     return () => unsubscribe();
-  }, []); // Ensure the useEffect runs only once on component mount
+  }, []);
 
-  const login = () => {
-    // Implement the logic to handle login and set isAuthenticated to true
+  const login = async (email, password) => {
+    try {
+      await signInWithEmailAndPassword(database, email, password);
+      console.log("User logged in");
+      setIsAuthenticated(true);
+    } catch (err) {
+      console.error("Login error:", err.message);
+      setIsAuthenticated(false);
+      throw err;
+    }
   };
 
-  const logout = () => {
-    // Implement the logic to handle logout and set isAuthenticated to false
+  const signup = async (email, password) => {
+    try {
+      await createUserWithEmailAndPassword(database, email, password);
+      console.log("User signed up");
+      setIsAuthenticated(true);
+    } catch (err) {
+      console.error("Signup error:", err.message);
+      setIsAuthenticated(false);
+      throw err;
+    }
+  };
+
+  const logout = async () => {
+    try {
+      await signOut(database);
+      console.log("User logged out");
+      setIsAuthenticated(false);
+    } catch (err) {
+      console.error("Logout error:", err.message);
+    }
   };
 
   return (
-    <AuthContext.Provider value={{ isAuthenticated, setIsAuthenticated, login, logout }}>
+    <AuthContext.Provider value={{ isAuthenticated, login, signup, logout }}>
       {children}
     </AuthContext.Provider>
   );
 };
 
 export const useAuth = () => {
-  return useContext(AuthContext);
+  const context = useContext(AuthContext);
+  if (!context) {
+    throw new Error("useAuth must be used within an AuthProvider");
+  }
+  return context;
 };

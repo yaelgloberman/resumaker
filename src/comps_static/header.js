@@ -22,16 +22,10 @@ export default function Header() {
                 <Link to="/resumeForm">Resume form</Link>
               </li>
               <li>
-                <Link to="/cv">CV</Link>
-              </li>
-              <li>
                 <Link to="/resumeList">Resume list</Link>
               </li>
               <li>
                 <Link to="/loginSignup">login signup</Link>
-              </li>
-              <li>
-                <Link to="/resume">Resume1</Link>
               </li>
             </ul>
           </nav>
