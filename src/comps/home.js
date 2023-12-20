@@ -1,21 +1,82 @@
-import React from 'react'
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { Link } from 'react-router-dom'
-import Login_Signup from '../login_signup'
+import React, { useState } from 'react';
+import { BrowserRouter, Routes, Route, useNavigate } from 'react-router-dom';
+import { useAuth } from '../hooks/authContext';
 
 export default function Home() {
-  return (
+  const [login, setLogin] = useState(false);
+  const { login: authLogin, signup } = useAuth();
+  const navigate = useNavigate();
 
+  const handleLogin = async (isLogin) => {
+    setLogin(isLogin);
+  };
+
+  const handleSubmit = async (e, type) => {
+    e.preventDefault();
+    const email = e.target.email.value;
+    const password = e.target.password.value;
+
+    try {
+      if (type === 'signup') {
+        // Use signup function for signup
+        await signup(email, password);
+      } else {
+        // Use login function for login
+        await authLogin(email, password);
+      }
+
+      if (type === 'signup') {
+        navigate('/resumeForm');
+      } else {
+        navigate('/appResume');
+      }
+    } catch (err) {
+      alert(err.code);
+      setLogin(true);
+    }
+  };
+
+  const handleReset = () => {
+    navigate('/reset');
+  };
+
+  return (
     <div className='container'>
-      <div className='row justify-content-center'>
-          <h1 className='text-center display-1 my-5'>Welcome to resumaker</h1>
-        <div className='col-md-5'>
-          <div className="d-flex text-center border ">
-            <Login_Signup />
+    <div className='row justify-content-center'>
+        <h1 className='text-center display-1 my-5'>Welcome to resumaker</h1>
+      <div className='col-md-5'>
+        <div className="d-flex text-center border ">
+        <div className='container m-5'>
+      <form onSubmit={(e) => handleSubmit(e, login ? 'signin' : 'signup')}>
+        <div className='row mb-3'>
+          <label htmlFor='email' className='col-sm-2 col-form-label'>
+            Email:
+          </label>
+          <div className='col-sm-10'>
+            <input name='email' className='form-control' type='email' id='email' />
           </div>
+        </div>
+        <div className='row mb-3'>
+          <label htmlFor='password' className='col-sm-2 col-form-label ps-1'>
+            Password:
+          </label>
+          <div className='col-sm-10'>
+            <input name='password' className='form-control' type='password' id='password' />
+          </div>
+        </div>
+        <div className='d-flex justify-content-center mt-5 '>
+          <button type='submit' className='btn btn-success col-4 mx-2' onClick={() => handleLogin(true)}>
+            Log in
+          </button>
+          <button type='submit' className='btn btn-primary col-4 mx-2' onClick={() => handleLogin(false)}>
+            Sign up
+          </button>
+        </div>
+      </form>
+    </div>
         </div>
       </div>
     </div>
-
-  )
+  </div>
+  );
 }

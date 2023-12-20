@@ -9,7 +9,6 @@ import './App.css';
 import AppResume from "./comps_resume/app_resume";
 import ResumeForm from "./comps_resume/resumeForm";
 import ResumeList from "./comps_resume/resumeList"
-import LoginSignup from "./login_signup"
 
 import PublicRoute from "./routes/publicRoute";
 import PrivateRoute from "./routes/privateRoute";
@@ -28,7 +27,6 @@ function App() {
         <Header />
         <Routes >
           <Route path="/" element={<Home />} />
-          <Route path="/loginSignup" element={<PublicRoute element={<LoginSignup />} />} />
           <Route path="/appResume" element={<PrivateRoute element={<AppResume />} />} />
           <Route path="/resumeForm" element={<PrivateRoute element={<ResumeForm />} />} />
           <Route path="/resumeList" element={<PrivateRoute element={<ResumeList />} />} />
