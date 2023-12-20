@@ -3,8 +3,10 @@ import CvMaker from './cvMaker'
 import Firebase from '../firebase/firebase';
 import { Button } from 'reactstrap';
 import { pdfGenerate } from './pdfDownloadButton';
+import { useAuth } from '../hooks/authContext';
 
 const ResumeForm = () => {
+    const { userId } = useAuth();
     const [allResumes, setAllResumes] = useState([]);
     const [firstName, setFirstName] = useState('Full name');
     const [lastName, setLastName] = useState('');
@@ -45,6 +47,7 @@ const ResumeForm = () => {
 
         // Create a new resume object
         const newResume = {
+            userId,
             firstName,
             lastName,
             imageUrl,

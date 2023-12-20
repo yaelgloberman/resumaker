@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import Firebase from '../firebase/firebase';
 import SmallResume from './smallCv';
+import { useAuth } from '../hooks/authContext';
 
 export default function FireLiveToys() {
+  const { userId } = useAuth();
   const [resumes, setResumes] = useState([]);
   const [loading, setLoading] = useState(true);
   const firebase = new Firebase();
@@ -11,7 +13,7 @@ export default function FireLiveToys() {
     // Fetch resumes when the component mounts
     const fetchResumes = async () => {
       try {
-        const resumesData = await firebase.getAllResumes();
+        const resumesData = await firebase.getAllResumesOfUser(userId);
         setResumes(resumesData);
         setLoading(false);
       } catch (error) {
