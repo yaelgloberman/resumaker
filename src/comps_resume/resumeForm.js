@@ -4,7 +4,6 @@ import Firebase from '../firebase/firebase';
 import { Button } from 'reactstrap';
 import { pdfGenerate } from './pdfDownloadButton';
 import { useAuth } from '../hooks/authContext';
-import { use } from 'bcrypt/promises';
 import { storage } from '../firebase/config'
 import { listAll, ref, uploadBytes, getDownloadURL } from 'firebase/storage'
 import uuid4 from "uuid4"

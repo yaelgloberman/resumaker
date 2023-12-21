@@ -38,7 +38,7 @@ export default function FireLiveToys() {
         <p>Loading...</p>
       ) : (
         resumes.map((resume) => (
-<div key={resume.userId} className='border m-1 col-5 ' style={{ transform: 'scale(0.8)' }}>
+<div key={resume.id} className='border m-1 col-5 ' style={{ transform: 'scale(0.8)' }}>
             <CvMaker
               firstName={resume.firstName}
               lastName={resume.lastName}
